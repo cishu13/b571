@@ -20,11 +20,9 @@ void Network::loadFromFile(string fileName) {
     while (getline(file, line)) {
         istringstream ss(line);
         string type;
-        // The first token indicates whether the line defines a User or a Post.
         ss >> type;
 
         if (type == "User") {
-            // "User <username>" lines add a new user to the database.
             string userName;
             ss >> userName;
             if (ss.fail()) {
@@ -37,7 +35,6 @@ void Network::loadFromFile(string fileName) {
                 throw std::runtime_error("Runtime Error");
             }
         } else if (type == "Post") {
-            // "Post <id> <username> <message...>" lines add a post to the database.
             unsigned int id;
             string text;
             string userName;
@@ -68,16 +65,6 @@ void Network::loadFromFile(string fileName) {
     }
 
     file.close();
-}
-
-unsigned int Network::getNextPostId() const {
-    unsigned int maxId = 0;
-    for (unsigned int i = 0; i < posts.size(); ++i) {
-        if (posts[i]->getPostId() > maxId) {
-            maxId = posts[i]->getPostId();
-        }
-    }
-    return maxId + 1;
 }
 
 void Network::addUser(string userName) {

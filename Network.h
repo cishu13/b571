@@ -19,7 +19,6 @@ class Network {
         void loadFromFile(std::string fileName);
         void addUser(std::string userName);
         void addPost(unsigned int postId, std::string userName, std::string postText);
-        unsigned int getNextPostId() const;
         std::vector<Post*> getPostsByUser(std::string userName);
         std::vector<Post*> getPostsWithTag(std::string tagName);
         std::vector<std::string> getMostPopularHashtag();

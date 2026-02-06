@@ -12,7 +12,6 @@ void printMenu() {
     cout << "2. show posts by user" << endl;
     cout << "3. show posts with hashtag" << endl;
     cout << "4. show most popular hashtag" << endl;
-    cout << "5. create a new post" << endl;
     cout << "9. quit" << endl;
     cout << "--------> Enter your option: ";
 }
@@ -60,30 +59,6 @@ void processMostPopularHashtag(Network& cppeers) {
     }
 }
 
-void processCreatePost(Network& cppeers) {
-    string username = "";
-    string message = "";
-
-    cout << "Enter username: ";
-    cin >> username;
-
-    cout << "Enter message: ";
-    std::getline(cin >> std::ws, message);
-
-    if (username.empty() || message.empty()) {
-        throw std::invalid_argument("Username or message cannot be empty");
-    }
-
-    try {
-        cppeers.addUser(username);
-    } catch (const std::invalid_argument&) {
-        // User already exists; continue to add the post.
-    }
-
-    unsigned int nextId = cppeers.getNextPostId();
-    cppeers.addPost(nextId, username, message);
-}
-
 int main() {
 
     try {
@@ -109,10 +84,6 @@ int main() {
                 }
                 case 4: {
                     processMostPopularHashtag(cppeers);
-                    break;
-                }
-                case 5: {
-                    processCreatePost(cppeers);
                     break;
                 }
             }
